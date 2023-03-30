@@ -28,24 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.dgv_Bids = new System.Windows.Forms.DataGridView();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tbpg_Bids = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_ViewMax = new System.Windows.Forms.Button();
+            this.btn_ViewMin = new System.Windows.Forms.Button();
             this.tbx_SelectedBid = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.iGCellStyleDesign1 = new TenTec.Windows.iGridLib.iGCellStyleDesign();
-            this.iGColHdrStyleDesign1 = new TenTec.Windows.iGridLib.iGColHdrStyleDesign();
-            this.iGDropDownList1 = new TenTec.Windows.iGridLib.iGDropDownList(this.components);
-            this.iGrid1 = new TenTec.Windows.iGridLib.iGrid();
+            this.tbx_Filter = new System.Windows.Forms.TextBox();
+            this.chbx_Filter = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Bids)).BeginInit();
             this.TabControl.SuspendLayout();
             this.tbpg_Bids.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iGrid1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv_Bids
@@ -60,7 +56,7 @@
             this.dgv_Bids.Location = new System.Drawing.Point(0, 0);
             this.dgv_Bids.Name = "dgv_Bids";
             this.dgv_Bids.ReadOnly = true;
-            this.dgv_Bids.Size = new System.Drawing.Size(806, 231);
+            this.dgv_Bids.Size = new System.Drawing.Size(1265, 231);
             this.dgv_Bids.TabIndex = 0;
             this.dgv_Bids.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Bids_CellClick);
             // 
@@ -74,20 +70,22 @@
             this.TabControl.Location = new System.Drawing.Point(12, 12);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(830, 361);
+            this.TabControl.Size = new System.Drawing.Size(1289, 361);
             this.TabControl.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabControl.TabIndex = 2;
             // 
             // tbpg_Bids
             // 
+            this.tbpg_Bids.Controls.Add(this.chbx_Filter);
             this.tbpg_Bids.Controls.Add(this.panel1);
-            this.tbpg_Bids.Controls.Add(this.button2);
-            this.tbpg_Bids.Controls.Add(this.button1);
+            this.tbpg_Bids.Controls.Add(this.btn_ViewMax);
+            this.tbpg_Bids.Controls.Add(this.btn_ViewMin);
+            this.tbpg_Bids.Controls.Add(this.tbx_Filter);
             this.tbpg_Bids.Controls.Add(this.tbx_SelectedBid);
             this.tbpg_Bids.Location = new System.Drawing.Point(4, 22);
             this.tbpg_Bids.Name = "tbpg_Bids";
             this.tbpg_Bids.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpg_Bids.Size = new System.Drawing.Size(822, 335);
+            this.tbpg_Bids.Size = new System.Drawing.Size(1281, 335);
             this.tbpg_Bids.TabIndex = 0;
             this.tbpg_Bids.Text = "Предварительный расчет";
             this.tbpg_Bids.UseVisualStyleBackColor = true;
@@ -100,28 +98,28 @@
             this.panel1.Controls.Add(this.dgv_Bids);
             this.panel1.Location = new System.Drawing.Point(7, 61);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(809, 234);
+            this.panel1.Size = new System.Drawing.Size(1268, 234);
             this.panel1.TabIndex = 4;
             // 
-            // button2
+            // btn_ViewMax
             // 
-            this.button2.Location = new System.Drawing.Point(511, 17);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 20);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button1";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btn_ViewMax.Location = new System.Drawing.Point(511, 17);
+            this.btn_ViewMax.Name = "btn_ViewMax";
+            this.btn_ViewMax.Size = new System.Drawing.Size(75, 20);
+            this.btn_ViewMax.TabIndex = 2;
+            this.btn_ViewMax.Text = "vMax";
+            this.btn_ViewMax.UseVisualStyleBackColor = true;
+            this.btn_ViewMax.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button1
+            // btn_ViewMin
             // 
-            this.button1.Location = new System.Drawing.Point(414, 17);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 20);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_ViewMin.Location = new System.Drawing.Point(414, 17);
+            this.btn_ViewMin.Name = "btn_ViewMin";
+            this.btn_ViewMin.Size = new System.Drawing.Size(75, 20);
+            this.btn_ViewMin.TabIndex = 2;
+            this.btn_ViewMin.Text = "vMin";
+            this.btn_ViewMin.UseVisualStyleBackColor = true;
+            this.btn_ViewMin.Click += new System.EventHandler(this.button1_Click);
             // 
             // tbx_SelectedBid
             // 
@@ -135,23 +133,37 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(805, 618);
+            this.tabPage2.Size = new System.Drawing.Size(822, 335);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Заказы";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // iGrid1
+            // tbx_Filter
             // 
-            this.iGrid1.Header.Height = 16;
-            this.iGrid1.Location = new System.Drawing.Point(0, 0);
-            this.iGrid1.Name = "iGrid1";
-            this.iGrid1.TabIndex = 0;
+            this.tbx_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbx_Filter.Location = new System.Drawing.Point(999, 18);
+            this.tbx_Filter.Name = "tbx_Filter";
+            this.tbx_Filter.Size = new System.Drawing.Size(201, 20);
+            this.tbx_Filter.TabIndex = 1;
+            // 
+            // chbx_Filter
+            // 
+            this.chbx_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbx_Filter.AutoSize = true;
+            this.chbx_Filter.Checked = true;
+            this.chbx_Filter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbx_Filter.Location = new System.Drawing.Point(1206, 20);
+            this.chbx_Filter.Name = "chbx_Filter";
+            this.chbx_Filter.Size = new System.Drawing.Size(66, 17);
+            this.chbx_Filter.TabIndex = 5;
+            this.chbx_Filter.Text = "Фильтр";
+            this.chbx_Filter.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 421);
+            this.ClientSize = new System.Drawing.Size(1313, 421);
             this.Controls.Add(this.TabControl);
             this.Name = "MainForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -163,7 +175,6 @@
             this.tbpg_Bids.ResumeLayout(false);
             this.tbpg_Bids.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.iGrid1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -175,12 +186,10 @@
         private System.Windows.Forms.TabPage tbpg_Bids;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox tbx_SelectedBid;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_ViewMin;
+        private System.Windows.Forms.Button btn_ViewMax;
         private System.Windows.Forms.Panel panel1;
-        private TenTec.Windows.iGridLib.iGCellStyleDesign iGCellStyleDesign1;
-        private TenTec.Windows.iGridLib.iGColHdrStyleDesign iGColHdrStyleDesign1;
-        private TenTec.Windows.iGridLib.iGDropDownList iGDropDownList1;
-        private TenTec.Windows.iGridLib.iGrid iGrid1;
+        private System.Windows.Forms.CheckBox chbx_Filter;
+        private System.Windows.Forms.TextBox tbx_Filter;
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
@@ -76,6 +76,7 @@ namespace JIP
         private void button1_Click(object sender, EventArgs e)
         {
             this.dgv_Bids.Columns["nf_OutCustomer"].Visible = false;
+            this.dgv_Bids.Columns["IsNew"].Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
