@@ -25,7 +25,7 @@ namespace JIP
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            CreatColumns();
+            //CreatColumns();
             RefreshDataGrid(dgv_Bids);
         }
 
@@ -38,18 +38,30 @@ namespace JIP
             dgv_Bids.Columns.Add("IsNew", String.Empty);
         }
 
-        private void RefreshDataGrid(DataGridView dgw)
+        private void RefreshDataGrid(DataGridView dgv)
         {
-            dgw.Rows.Clear();
+            dgv.Rows.Clear();
             string queryString = $"select nf_Bid,nf_NameBid,nf_OutCustomer,nf_Priority from t_Bids";
-            SqlCommand command = new SqlCommand(queryString, dataBase.getConnection());
-            dataBase.openConnection();
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                ReadSingleRow(dgw, reader);
-            }
-            reader.Close();
+            //SqlCommand command = new SqlCommand(queryString, dataBase.GetConnection());//позволяет выполнять операции с данными из БД
+            dataBase.OpenConnection();
+
+            DataSet ds;
+            SqlDataAdapter adapter;
+            //SqlCommandBuilder commandBuilder;
+            adapter = new SqlDataAdapter(queryString, dataBase.GetConnection());
+            ds = new DataSet();
+            adapter.Fill(ds);
+            dgv.DataSource = ds.Tables[0];
+
+            //SqlDataReader reader = command.ExecuteReader();//считывает полученные в результате запроса данные
+            //if (reader.HasRows) // если есть данные
+            //{
+            //    while (reader.Read())// построчно считываем данные
+            //    {
+            //        ReadSingleRow(dgw, reader);
+            //    }
+            //    reader.Close();
+            //}
         }
 
 
@@ -76,7 +88,7 @@ namespace JIP
         private void button1_Click(object sender, EventArgs e)
         {
             this.dgv_Bids.Columns["nf_OutCustomer"].Visible = false;
-            this.dgv_Bids.Columns["IsNew"].Visible = false;
+            //this.dgv_Bids.Columns["IsNew"].Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -84,5 +96,46 @@ namespace JIP
             dgv_Bids.Columns["nf_OutCustomer"].Visible = true;
         }
 
+        private void tbx_Filter_TextChanged(object sender, EventArgs e)
+        {
+            //Search(dgv_Bids);
+
+
+            //(dgv_Bids.DataSource as DataTable).DefaultView.RowFilter = $"nf_NameBid LIKE '%{tbx_Filter.Text}%'";
+            //DataView MyDataView = new DataView(dgv_Bids);
+
+
+            try
+            {
+                //((DataTable)dgv_Bids.DataSource).DefaultView.RowFilter = "nf_NameBid like'" + tbx_Filter.Text.Trim().Replace("'", "''") + "%'"; // поиск начиная с первого символа
+                ((DataTable)dgv_Bids.DataSource).DefaultView.RowFilter = string.Format("nf_NameBid like '%{0}%'", tbx_Filter.Text.Trim().Replace("'", "''")); // поиск не зависит от места в строке
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        private void Search(DataGridView dgw)
+        {
+            dgw.Rows.Clear();
+            string searchString = $"select * from ordrsip.dbo.tBids where concat (nf_Id, nf_Designation, nf_Name, nf_TaskType, nf_Priority) like '%" + tbx_Filter.Text + "%'";
+            SqlCommand com = new SqlCommand(searchString, dataBase.GetConnection());
+            dataBase.OpenConnection();
+            SqlDataReader read = com.ExecuteReader();
+
+            while (read.Read())
+            {
+                ReadSingleRow(dgw, read);
+            }
+            read.Close();
+        }
+
+        private void btn_ShowColumnList_Click(object sender, EventArgs e)
+        {
+            chlbx_Columns.Visible = false;
+        }
     }
 }
+

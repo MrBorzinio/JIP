@@ -31,13 +31,15 @@
             this.dgv_Bids = new System.Windows.Forms.DataGridView();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tbpg_Bids = new System.Windows.Forms.TabPage();
+            this.chbx_Filter = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_ViewMax = new System.Windows.Forms.Button();
             this.btn_ViewMin = new System.Windows.Forms.Button();
+            this.tbx_Filter = new System.Windows.Forms.TextBox();
             this.tbx_SelectedBid = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tbx_Filter = new System.Windows.Forms.TextBox();
-            this.chbx_Filter = new System.Windows.Forms.CheckBox();
+            this.chlbx_Columns = new System.Windows.Forms.CheckedListBox();
+            this.btn_ShowColumnList = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Bids)).BeginInit();
             this.TabControl.SuspendLayout();
             this.tbpg_Bids.SuspendLayout();
@@ -51,12 +53,11 @@
             this.dgv_Bids.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgv_Bids.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_Bids.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Bids.Location = new System.Drawing.Point(0, 0);
             this.dgv_Bids.Name = "dgv_Bids";
             this.dgv_Bids.ReadOnly = true;
-            this.dgv_Bids.Size = new System.Drawing.Size(1265, 231);
+            this.dgv_Bids.Size = new System.Drawing.Size(1138, 231);
             this.dgv_Bids.TabIndex = 0;
             this.dgv_Bids.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Bids_CellClick);
             // 
@@ -76,6 +77,7 @@
             // 
             // tbpg_Bids
             // 
+            this.tbpg_Bids.Controls.Add(this.btn_ShowColumnList);
             this.tbpg_Bids.Controls.Add(this.chbx_Filter);
             this.tbpg_Bids.Controls.Add(this.panel1);
             this.tbpg_Bids.Controls.Add(this.btn_ViewMax);
@@ -90,11 +92,23 @@
             this.tbpg_Bids.Text = "Предварительный расчет";
             this.tbpg_Bids.UseVisualStyleBackColor = true;
             // 
+            // chbx_Filter
+            // 
+            this.chbx_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbx_Filter.AutoSize = true;
+            this.chbx_Filter.Location = new System.Drawing.Point(1206, 20);
+            this.chbx_Filter.Name = "chbx_Filter";
+            this.chbx_Filter.Size = new System.Drawing.Size(66, 17);
+            this.chbx_Filter.TabIndex = 5;
+            this.chbx_Filter.Text = "Фильтр";
+            this.chbx_Filter.UseVisualStyleBackColor = true;
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.chlbx_Columns);
             this.panel1.Controls.Add(this.dgv_Bids);
             this.panel1.Location = new System.Drawing.Point(7, 61);
             this.panel1.Name = "panel1";
@@ -121,6 +135,15 @@
             this.btn_ViewMin.UseVisualStyleBackColor = true;
             this.btn_ViewMin.Click += new System.EventHandler(this.button1_Click);
             // 
+            // tbx_Filter
+            // 
+            this.tbx_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbx_Filter.Location = new System.Drawing.Point(999, 18);
+            this.tbx_Filter.Name = "tbx_Filter";
+            this.tbx_Filter.Size = new System.Drawing.Size(201, 20);
+            this.tbx_Filter.TabIndex = 1;
+            this.tbx_Filter.TextChanged += new System.EventHandler(this.tbx_Filter_TextChanged);
+            // 
             // tbx_SelectedBid
             // 
             this.tbx_SelectedBid.Location = new System.Drawing.Point(7, 17);
@@ -133,31 +156,31 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(822, 335);
+            this.tabPage2.Size = new System.Drawing.Size(1281, 335);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Заказы";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tbx_Filter
+            // chlbx_Columns
             // 
-            this.tbx_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbx_Filter.Location = new System.Drawing.Point(999, 18);
-            this.tbx_Filter.Name = "tbx_Filter";
-            this.tbx_Filter.Size = new System.Drawing.Size(201, 20);
-            this.tbx_Filter.TabIndex = 1;
+            this.chlbx_Columns.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chlbx_Columns.FormattingEnabled = true;
+            this.chlbx_Columns.Location = new System.Drawing.Point(1144, 4);
+            this.chlbx_Columns.Name = "chlbx_Columns";
+            this.chlbx_Columns.Size = new System.Drawing.Size(120, 229);
+            this.chlbx_Columns.TabIndex = 1;
             // 
-            // chbx_Filter
+            // btn_ShowColumnList
             // 
-            this.chbx_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chbx_Filter.AutoSize = true;
-            this.chbx_Filter.Checked = true;
-            this.chbx_Filter.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbx_Filter.Location = new System.Drawing.Point(1206, 20);
-            this.chbx_Filter.Name = "chbx_Filter";
-            this.chbx_Filter.Size = new System.Drawing.Size(66, 17);
-            this.chbx_Filter.TabIndex = 5;
-            this.chbx_Filter.Text = "Фильтр";
-            this.chbx_Filter.UseVisualStyleBackColor = true;
+            this.btn_ShowColumnList.Location = new System.Drawing.Point(593, 17);
+            this.btn_ShowColumnList.Name = "btn_ShowColumnList";
+            this.btn_ShowColumnList.Size = new System.Drawing.Size(112, 20);
+            this.btn_ShowColumnList.TabIndex = 6;
+            this.btn_ShowColumnList.Text = "button1";
+            this.btn_ShowColumnList.UseVisualStyleBackColor = true;
+            this.btn_ShowColumnList.Click += new System.EventHandler(this.btn_ShowColumnList_Click);
             // 
             // MainForm
             // 
@@ -191,5 +214,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox chbx_Filter;
         private System.Windows.Forms.TextBox tbx_Filter;
+        private System.Windows.Forms.Button btn_ShowColumnList;
+        private System.Windows.Forms.CheckedListBox chlbx_Columns;
     }
 }

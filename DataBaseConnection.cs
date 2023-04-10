@@ -9,10 +9,10 @@ namespace JIP
         //"User id=UserName;" +
         //"Password=Secret;";
 
-        //SqlConnection sqlConnection = new SqlConnection(@"Data Source=JAN\SQLEXPRESS;Initial Catalog=BidsCalc;Integrated Security=True");
-        SqlConnection sqlConnection = new SqlConnection(@"Data Source=BB01-WS542983\STP;Initial Catalog=BidsCalc;User id=sa;Password=486");
+        SqlConnection sqlConnection = new SqlConnection(@"Data Source=JAN\SQLEXPRESS;Initial Catalog=BidsCalc;Integrated Security=True");
+        //SqlConnection sqlConnection = new SqlConnection(@"Data Source=BB01-WS542983\STP;Initial Catalog=BidsCalc;User id=sa;Password=486");
 
-        public void openConnection()
+        public void OpenConnection()
         {
             if (sqlConnection.State == System.Data.ConnectionState.Closed)
             {
@@ -20,7 +20,7 @@ namespace JIP
             }
         }
 
-        public void closeConnection()
+        public void CloseConnection()
         {
             if (sqlConnection.State == System.Data.ConnectionState.Open)
             {
@@ -28,7 +28,7 @@ namespace JIP
             }
         }
 
-        public SqlConnection getConnection()
+        public SqlConnection GetConnection()
         {
             return sqlConnection;
         }

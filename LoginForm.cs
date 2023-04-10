@@ -46,14 +46,14 @@ namespace JIP
             cbx_User.Select();
 
             var queryUsers = $"select id, nf_User from t_Users where nf_Pas IS NOT NULL";
-            SqlDataAdapter commandUsers = new SqlDataAdapter(queryUsers, database.getConnection());
-            database.openConnection();
+            SqlDataAdapter commandUsers = new SqlDataAdapter(queryUsers, database.GetConnection());
+            database.OpenConnection();
             DataTable users = new DataTable();
             commandUsers.Fill(users);
             cbx_User.DataSource = users;
             cbx_User.ValueMember = "id";
             cbx_User.DisplayMember = "nf_User"; 
-            database.closeConnection();
+            database.CloseConnection();
 
         }
 
@@ -62,12 +62,12 @@ namespace JIP
             if (!string.IsNullOrEmpty(cbx_User.Text) && !string.IsNullOrEmpty(tbx_Password.Text))
             {
                 var sqlCheckPassUser  = $"SELECT*FROM t_Users WHERE nf_User='{cbx_User.Text}' AND nf_Pas='{tbx_Password.Text}'";
-                var commandCheckPassUser = new SqlCommand(sqlCheckPassUser, database.getConnection());
+                var commandCheckPassUser = new SqlCommand(sqlCheckPassUser, database.GetConnection());
 
-                database.openConnection();
+                database.OpenConnection();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 DataTable table = new DataTable();
-                SqlCommand command = new SqlCommand(sqlCheckPassUser, database.getConnection());
+                SqlCommand command = new SqlCommand(sqlCheckPassUser, database.GetConnection());
                 adapter.SelectCommand = command;
                 adapter.Fill(table);
 
