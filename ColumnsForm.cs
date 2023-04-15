@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace JIP.Resources
 {
-    public partial class Form1 : Form
+    public partial class ColumnsForm : Form
     {
-        public Form1()
+        public ColumnsForm()
         {
             InitializeComponent();
+        }
+
+        private void ColumnsForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
