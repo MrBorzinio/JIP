@@ -26,7 +26,6 @@ namespace JIP
 
         public static extern bool ReleaseCapture();
 
-
         private void LoginForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)

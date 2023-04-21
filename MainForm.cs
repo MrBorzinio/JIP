@@ -3,6 +3,8 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Text;
+using JIP.Resources;
+using System.Collections.Generic;
 
 namespace JIP
 {
@@ -73,7 +75,7 @@ namespace JIP
             //{
             //    while (reader.Read())// построчно считываем данные
             //    {
-            //        ReadSingleRow(dgw, reader);
+            //        ReadSingleRow(dgм, reader);
             //    }
             //    reader.Close();
             //}
@@ -100,18 +102,6 @@ namespace JIP
             Application.Exit();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.dgv_Bids.Columns["Контрагент"].Visible = false;
-            //this.dgv_Bids.Columns["IsNew"].Visible = false;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            dgv_Bids.Columns["Контрагент"].Visible = true;
-        }
-
-
         //private void Search(DataGridView dgw)
         //{
         //    dgw.Rows.Clear();
@@ -126,6 +116,27 @@ namespace JIP
         //    }
         //    read.Close();
         //}
+
+        //Создайте специальный дополнительный столбец, заполните его строковым представлением каждой строки и отфильтруйте DataGridView по значениям из этого столбца
+        private void AddSearchColumn(DataGridView dgv)
+        {
+            DataSet ds;
+            ds = new DataSet();
+            //adapter.Fill(ds);
+            dgv.DataSource = ds.Tables[0];
+
+            //DataColumn dcRowString = ds.Tables[0].Columns.Add("_RowString", typeof(string));
+            foreach (DataRow dataRow in ds.Tables[0].Rows)
+            {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < ds.Tables[0].Columns.Count - 1; i++)
+                {
+                    sb.Append(dataRow[i].ToString());
+                    sb.Append("\t");
+                }
+                dataRow[dcRowString] = sb.ToString();
+            }
+        }
 
         private void tbx_Filter_TextChanged(object sender, EventArgs e)
         {
@@ -147,6 +158,33 @@ namespace JIP
             {
 
             }
+        }
+
+        private void btn_ShowColumnList_Click(object sender, EventArgs e)
+        {
+            int s = dgv_Bids.ColumnCount;
+            string[,] arrColumn= new string[s,2];
+            for (int i = 0; i < s; i++)
+            //foreach (DataGridViewColumn column in dgv_Bids.Columns)
+            {
+                string valVisible=dgv_Bids.Columns[i].Visible == true ? "1" : "0";
+                arrColumn[i, 0] = dgv_Bids.Columns[i].HeaderText;
+                arrColumn[i, 1] = valVisible;
+            }
+            //List<string> columnName = new List<string>();
+            //foreach (DataGridViewColumn column in dgv_Bids.Columns)
+            //    columnName.Add(column.HeaderText);
+
+            ColumnsForm frmColumns = new ColumnsForm();
+            //frmColumns.columnNameSource = columnName;
+            frmColumns.arrColumnNameSource = arrColumn;
+            frmColumns.Owner = this;
+            frmColumns.ShowDialog();
+        }
+
+        public void ChangeColumnVisieble (string columnName, Boolean visiebleState)
+        {
+            dgv_Bids.Columns[columnName].Visible = visiebleState;
         }
     }
 }

@@ -120,5 +120,8 @@
   <ItemGroup>
     <None Include="Resources\Фон_S1.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="План проекта.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
