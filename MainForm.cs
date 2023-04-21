@@ -56,7 +56,7 @@ namespace JIP
             adapter.Fill(ds);
             dgv.DataSource = ds.Tables[0];
 
-            //Создайте специальный дополнительный столбец, заполните его строковым представлением каждой строки и отфильтруйте DataGridView по значениям из этого столбца
+            //Создаем специальный дополнительный столбец, заполняем его строковым представлением каждой строки и фильтруем DataGridView по значениям из этого столбца
             DataColumn dcRowString = ds.Tables[0].Columns.Add("_RowString", typeof(string));
             foreach (DataRow dataRow in ds.Tables[0].Rows)
             {
@@ -68,7 +68,7 @@ namespace JIP
                 }
                 dataRow[dcRowString] = sb.ToString();
             }
-            dgv.Columns["_RowString"].Visible = false; //скрыть специальный столбец для поиска
+            //dgv.Columns["_RowString"].Visible = false; //скрыть специальный столбец для поиска
 
             //SqlDataReader reader = command.ExecuteReader();//считывает полученные в результате запроса данные
             //if (reader.HasRows) // если есть данные
@@ -82,10 +82,10 @@ namespace JIP
         }
 
 
-        private void ReadSingleRow(DataGridView dgw, IDataReader record)
-        {
-            dgw.Rows.Add(record.GetString(0), record.GetString(1), record.IsDBNull(2) ? null : record.GetString(2), record.GetInt32(3), RowState.ModifiedNew);
-        }
+        //private void ReadSingleRow(DataGridView dgw, IDataReader record)
+        //{
+        //    dgw.Rows.Add(record.GetString(0), record.GetString(1), record.IsDBNull(2) ? null : record.GetString(2), record.GetInt32(3), RowState.ModifiedNew);
+        //}
 
         private void dgv_Bids_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -116,27 +116,6 @@ namespace JIP
         //    }
         //    read.Close();
         //}
-
-        //Создайте специальный дополнительный столбец, заполните его строковым представлением каждой строки и отфильтруйте DataGridView по значениям из этого столбца
-        private void AddSearchColumn(DataGridView dgv)
-        {
-            DataSet ds;
-            ds = new DataSet();
-            //adapter.Fill(ds);
-            dgv.DataSource = ds.Tables[0];
-
-            //DataColumn dcRowString = ds.Tables[0].Columns.Add("_RowString", typeof(string));
-            foreach (DataRow dataRow in ds.Tables[0].Rows)
-            {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < ds.Tables[0].Columns.Count - 1; i++)
-                {
-                    sb.Append(dataRow[i].ToString());
-                    sb.Append("\t");
-                }
-                dataRow[dcRowString] = sb.ToString();
-            }
-        }
 
         private void tbx_Filter_TextChanged(object sender, EventArgs e)
         {
@@ -184,8 +163,50 @@ namespace JIP
 
         public void ChangeColumnVisieble (string columnName, Boolean visiebleState)
         {
-            dgv_Bids.Columns[columnName].Visible = visiebleState;
+            if (dgv_Bids.Columns[columnName].Visible != visiebleState)
+                {
+                dgv_Bids.Columns[columnName].Visible = visiebleState;
+                ChangeSearchColumn();
+                }
         }
+
+       //изменение дополнительного столбца, заполнение его строковым представлением каждой строки и отфильтруйте DataGridView по значениям из этого столбца (видимого)
+        public void ChangeSearchColumn()//(DataGridView dgv)
+        {
+            DataSet ds;
+            //ds = new DataSet();
+            DataTable dt = (DataTable)dgv_Bids.DataSource;
+            //dgv_Bids.DataSource = ds.Tables[0];
+            DataColumn dcRowString = dt.Columns["_RowString"];
+            //int ewe = dt.Columns.Count - 1;
+            foreach (DataRow dataRow in dt.Rows)
+            {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < dt.Columns.Count - 1; i++)
+                { 
+                    string colName = dt.Columns[i].ColumnName;
+                    if (dgv_Bids.Columns[colName].Visible == true)
+                    {
+                        sb.Append(dataRow[i].ToString());
+                        sb.Append("\t");
+                    }
+                }
+                dataRow[dcRowString] = sb.ToString();
+            }
+
+            //DataColumn dcRowString = ds.Tables[0].Columns["_RowString"];
+            //foreach (DataRow dataRow in ds.Tables[0].Rows)
+            //{
+            //    StringBuilder sb = new StringBuilder();
+            //    for (int i = 0; i < ds.Tables[0].Columns.Count - 1; i++)
+            //    {
+            //        sb.Append(dataRow[i].ToString());
+            //        sb.Append("\t");
+            //    }
+            //    dataRow[dcRowString] = sb.ToString();
+            //}
+        }
+
     }
 }
 

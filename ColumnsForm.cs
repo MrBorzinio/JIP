@@ -80,11 +80,11 @@ namespace JIP.Resources
                 {
                     f1.ChangeColumnVisieble(selectedColumn,true);
                 }
-            else
+                else
                 {
                     f1.ChangeColumnVisieble(selectedColumn, false);
                 }
-
+                //f1.ChangeSearchColumn();
             }
         }
 
