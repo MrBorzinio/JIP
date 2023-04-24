@@ -44,7 +44,8 @@ namespace JIP
         private void RefreshDataGrid(DataGridView dgv)
         {
             dgv.Rows.Clear();
-            string queryString = $"select nf_Bid as ЗаявкаID,nf_NameBid as Наименование,nf_OutCustomer as Контрагент,nf_Priority as Приоритет from t_Bids";
+            //string queryString = $"select nf_Bid as ЗаявкаID,nf_NameBid as Наименование,nf_OutCustomer as Контрагент,nf_Priority as Приоритет from t_Bids";
+            string queryString = $"SELECT*FROM v_MainForm";
             //SqlCommand command = new SqlCommand(queryString, dataBase.GetConnection());//позволяет выполнять операции с данными из БД
             dataBase.OpenConnection();
 
@@ -205,6 +206,11 @@ namespace JIP
             //    }
             //    dataRow[dcRowString] = sb.ToString();
             //}
+        }
+
+        private void btn_ClearFieldFilter_Click(object sender, EventArgs e)
+        {
+            tbx_Filter.Clear();
         }
 
     }

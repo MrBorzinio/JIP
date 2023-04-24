@@ -31,13 +31,14 @@
             this.dgv_Bids = new System.Windows.Forms.DataGridView();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tbpg_Bids = new System.Windows.Forms.TabPage();
+            this.btn_ClearFieldFilter = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_ShowColumnList = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tbx_SelectedBid = new System.Windows.Forms.TextBox();
             this.tbx_Filter = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Bids)).BeginInit();
             this.TabControl.SuspendLayout();
             this.tbpg_Bids.SuspendLayout();
@@ -75,6 +76,7 @@
             // 
             // tbpg_Bids
             // 
+            this.tbpg_Bids.Controls.Add(this.btn_ClearFieldFilter);
             this.tbpg_Bids.Controls.Add(this.label2);
             this.tbpg_Bids.Controls.Add(this.label1);
             this.tbpg_Bids.Controls.Add(this.btn_ShowColumnList);
@@ -89,14 +91,39 @@
             this.tbpg_Bids.Text = "Предварительный расчет";
             this.tbpg_Bids.UseVisualStyleBackColor = true;
             // 
+            // btn_ClearFieldFilter
+            // 
+            this.btn_ClearFieldFilter.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_ClearFieldFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btn_ClearFieldFilter.FlatAppearance.BorderSize = 0;
+            this.btn_ClearFieldFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_ClearFieldFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_ClearFieldFilter.ForeColor = System.Drawing.Color.Black;
+            this.btn_ClearFieldFilter.Location = new System.Drawing.Point(1252, 5);
+            this.btn_ClearFieldFilter.Name = "btn_ClearFieldFilter";
+            this.btn_ClearFieldFilter.Size = new System.Drawing.Size(20, 20);
+            this.btn_ClearFieldFilter.TabIndex = 8;
+            this.btn_ClearFieldFilter.Text = "X";
+            this.btn_ClearFieldFilter.UseVisualStyleBackColor = false;
+            this.btn_ClearFieldFilter.Click += new System.EventHandler(this.btn_ClearFieldFilter_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Заявка:";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(995, 10);
+            this.label1.Location = new System.Drawing.Point(961, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Поиск:";
+            this.label1.Text = "Фильтр:";
             // 
             // btn_ShowColumnList
             // 
@@ -131,9 +158,9 @@
             // tbx_Filter
             // 
             this.tbx_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbx_Filter.Location = new System.Drawing.Point(1043, 7);
+            this.tbx_Filter.Location = new System.Drawing.Point(1012, 5);
             this.tbx_Filter.Name = "tbx_Filter";
-            this.tbx_Filter.Size = new System.Drawing.Size(229, 20);
+            this.tbx_Filter.Size = new System.Drawing.Size(237, 20);
             this.tbx_Filter.TabIndex = 1;
             this.tbx_Filter.TextChanged += new System.EventHandler(this.tbx_Filter_TextChanged);
             // 
@@ -146,15 +173,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Заказы";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Заявка:";
             // 
             // MainForm
             // 
@@ -188,5 +206,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbx_SelectedBid;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_ClearFieldFilter;
     }
 }
