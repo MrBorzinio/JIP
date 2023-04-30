@@ -31,6 +31,7 @@
             this.dgv_Bids = new System.Windows.Forms.DataGridView();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tbpg_Bids = new System.Windows.Forms.TabPage();
+            this.cbx_Statuses = new System.Windows.Forms.ComboBox();
             this.btn_ClearFieldFilter = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -76,6 +77,7 @@
             // 
             // tbpg_Bids
             // 
+            this.tbpg_Bids.Controls.Add(this.cbx_Statuses);
             this.tbpg_Bids.Controls.Add(this.btn_ClearFieldFilter);
             this.tbpg_Bids.Controls.Add(this.label2);
             this.tbpg_Bids.Controls.Add(this.label1);
@@ -90,6 +92,15 @@
             this.tbpg_Bids.TabIndex = 0;
             this.tbpg_Bids.Text = "Предварительный расчет";
             this.tbpg_Bids.UseVisualStyleBackColor = true;
+            // 
+            // cbx_Statuses
+            // 
+            this.cbx_Statuses.FormattingEnabled = true;
+            this.cbx_Statuses.Location = new System.Drawing.Point(636, 33);
+            this.cbx_Statuses.Name = "cbx_Statuses";
+            this.cbx_Statuses.Size = new System.Drawing.Size(121, 21);
+            this.cbx_Statuses.TabIndex = 9;
+            this.cbx_Statuses.SelectedIndexChanged += new System.EventHandler(this.cbx_Statuses_SelectedIndexChanged);
             // 
             // btn_ClearFieldFilter
             // 
@@ -207,5 +218,6 @@
         private System.Windows.Forms.TextBox tbx_SelectedBid;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_ClearFieldFilter;
+        private System.Windows.Forms.ComboBox cbx_Statuses;
     }
 }

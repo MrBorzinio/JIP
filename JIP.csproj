@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SQL\ЗапросыSQL.txt" />
+    <Content Include="Команды AdoNet.txt" />
     <Content Include="План проекта.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

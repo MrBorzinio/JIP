@@ -1,1 +1,18 @@
-﻿
+﻿CREATE VIEW v_MainForm AS
+SELECT
+dbo.t_Bids.nf_Bid AS Обозначение,
+dbo.t_Bids.nf_NameBid AS Наименование,
+dbo.t_Customers.nf_Customer AS Контрагент,
+dbo.t_WorkTypes.nf_WorkType AS [Тип задачи],
+dbo.t_Departments.nf_Department AS [В подразделении],
+dbo.t_CalcStatues.nf_BidStuses AS Статус
+FROM
+dbo.t_Bids 
+INNER JOIN
+dbo.t_Departments ON dbo.t_Bids.nf_idDepart = dbo.t_Departments.id
+INNER JOIN
+dbo.t_WorkTypes ON dbo.t_Bids.nf_idTypeWork = dbo.t_WorkTypes.id
+INNER JOIN
+dbo.t_Customers ON dbo.t_Bids.nf_idCustomer = dbo.t_Customers.id
+INNER JOIN
+dbo.t_CalcStatues ON dbo.t_Bids.nf_idStatusBid = dbo.t_CalcStatues.id

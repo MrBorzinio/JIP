@@ -30,6 +30,7 @@ namespace JIP
         {
             //CreatColumns();
             RefreshDataGrid(dgv_Bids);
+            RefreshComboboxStatuses();
         }
 
         //private void CreatColumns()
@@ -41,14 +42,28 @@ namespace JIP
         //    dgv_Bids.Columns.Add("IsNew", String.Empty);
         //}
 
+        private void RefreshComboboxStatuses ()
+        {
+            dataBase.OpenConnection();
+            string queryString = $"SELECT nf_BidStuses FROM t_CalcStatues";
+            //SqlDataAdapter da = new SqlDataAdapter(queryString, dataBase.GetConnection());
+            SqlDataAdapter adapter;
+            adapter = new SqlDataAdapter(queryString, dataBase.GetConnection());
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            cbx_Statuses.DataSource = dt; // setting the datasource property of combobox
+            cbx_Statuses.DisplayMember = "nf_BidStuses"; //"ItemName"; // Display Member which will display on screen
+            //cbx_Statuses.ValueMember = "ItemID"; //ID Member using which you will get the selected Item ID
+        }
+
         private void RefreshDataGrid(DataGridView dgv)
         {
             dgv.Rows.Clear();
             //string queryString = $"select nf_Bid as ЗаявкаID,nf_NameBid as Наименование,nf_OutCustomer as Контрагент,nf_Priority as Приоритет from t_Bids";
             string queryString = $"SELECT*FROM v_MainForm";
             //SqlCommand command = new SqlCommand(queryString, dataBase.GetConnection());//позволяет выполнять операции с данными из БД
-            dataBase.OpenConnection();
 
+            dataBase.OpenConnection();
             DataSet ds;
             SqlDataAdapter adapter;
             //SqlCommandBuilder commandBuilder;
@@ -174,7 +189,7 @@ namespace JIP
        //изменение дополнительного столбца, заполнение его строковым представлением каждой строки и отфильтруйте DataGridView по значениям из этого столбца (видимого)
         public void ChangeSearchColumn()//(DataGridView dgv)
         {
-            DataSet ds;
+            //DataSet ds;
             //ds = new DataSet();
             DataTable dt = (DataTable)dgv_Bids.DataSource;
             //dgv_Bids.DataSource = ds.Tables[0];
@@ -213,6 +228,17 @@ namespace JIP
             tbx_Filter.Clear();
         }
 
+        private void cbx_Statuses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ((DataTable)dgv_Bids.DataSource).DefaultView.RowFilter = string.Format("Статус like '{0}'", cbx_Statuses.Text.Trim().Replace("'", "''")); // поиск
+            }
+            catch (Exception)
+            {
+
+            }
+        }
     }
 }
 

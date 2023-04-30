@@ -1,0 +1,41 @@
+﻿Объект Command позволяет выполнять операции с данными из БД. 
+Объект DataReader считывает полученные в результате запроса данные. 
+Объект DataSet предназначен для хранения данных из БД и позволяет работать с ними независимо от БД. 
+Объект DataAdapter является посредником между DataSet и источником данных
+
+DataSet, DataTable, DataRow, DataColumn - классы, котрые составляют отключенный уровень
+
+DataSet представляет хранилище данных, с которыми можно работать независимо от наличия подключения, а SqlDataAdapter заполняет DataSet данными из БД.
+
+Объект DataSet содержит таблицы, которые представлены типом DataTable. 
+Таблица, в свою очередь, состоит из столбцов и строк. 
+Каждый столбец представляет объект DataColumn, а строка - объект DataRow. 
+Все данные строки хранятся в свойстве ItemArray, который представляет массив объектов - значений отдельных ячеек строки.
+
+Чтобы выполнить команду, необходимо применить один из методов SqlCommand:
+    ExecuteNonQuery: просто выполняет sql-выражение и возвращает количество измененных записей. Подходит для sql-выражений INSERT, UPDATE, DELETE.
+
+    ExecuteReader: выполняет sql-выражение и возвращает строки из таблицы. Подходит для sql-выражения SELECT.
+	Этот метод возвращает объект SqlDataReader, который используется для чтения данных.
+	После завершения работы с SqlDataReader надо его закрыть методом Close(). И пока один SqlDataReader не закрыт, другой объект SqlDataReader для одного и того же подключения мы использовать не сможем.
+	
+    ExecuteScalar: выполняет sql-выражение и возвращает одно скалярное значение, например, число. Подходит для sql-выражения SELECT в паре с одной из встроенных функций SQL, как например, Min, Max, Sum, Count.
+	
+1) string connectionString = @"Data Source=.\SQLEXPRESS;Initial Cat ... ";
+2) string sqlExpression = "SELECT * FROM Users";
+3) SqlConnection connection = new SqlConnection(connectionString))
+4) connection.Open();
+5) SqlCommand command = new SqlCommand(sqlExpression, connection);
+6) SqlDataReader reader = command.ExecuteReader();
+7) while (reader.Read()) {object id = reader["id"]; ... /  int id = reader.GetInt32(0);}
+8) reader.Close();
+
+Для получения данных каждого примитивного типа есть свой метод: https://metanit.com/sharp/adonet/2.7.php
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable table = new DataTable();
+            string querystring = $"select id_user, login_user,password_user from tUsers where login_user='{loginUser}' and password_user='{passUser}'";
+            SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+            if (table.Rows.Count == 1)
